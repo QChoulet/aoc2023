@@ -41,10 +41,8 @@ public class LineDecoder {
                 } else {
                     // If not a perfect match we remove the first letter of currentWord
                     // until it's empty or there is candidates
-                    List<Digit> candidates = findCandidates(currentWord, spelledDigits);
-                    while(!currentWord.isEmpty() && candidates.isEmpty()) {
+                    while(!currentWord.isEmpty() && findCandidates(currentWord, spelledDigits).isEmpty()) {
                         currentWord = currentWord.substring(1);
-                        candidates = findCandidates(currentWord, spelledDigits);
                     }
                 }
             }
