@@ -7,7 +7,7 @@ public class LineDecoder {
     private final List<String> spelledDigits = List.of("one", "two", "three", "four", "five", "six", "seven", "eight", "nine");
 
     public int decodeLine(String line, boolean includeSpelled) {
-        List<Digit> allDigits = allDigits(line, includeSpelled);
+        List<Digit> allDigits = findAllDigits(line, includeSpelled);
         if(allDigits.isEmpty()){
             return 0;
         }
@@ -16,7 +16,7 @@ public class LineDecoder {
         return firstDigit * 10 + lastDigit;
     }
 
-    public List<Digit> allDigits(String line, boolean includeSpelled) {
+    public List<Digit> findAllDigits(String line, boolean includeSpelled) {
         List<Digit> result = new ArrayList<>();
         String currentWord = "";
 
@@ -24,7 +24,7 @@ public class LineDecoder {
             char c = line.charAt(i);
             // We have a single char digit, add to the list and reset currentWord because a spelled number can't contain a digit
             if(isCharADigit(c)) {
-                result.add(new Digit(i, Character.getNumericValue(c)));
+                result.add(new Digit(i, Character.getNumericValue(c), Character.toString(c)));
                 currentWord = "";
             }
             // This whole part could probably be simplified a lot by using line.indexOf() for each element in spelledDigits
@@ -35,13 +35,13 @@ public class LineDecoder {
                 // Let's see if our current word matches a spelled digit
                 int wordIndex = spelledDigits.indexOf(currentWord);
                 if(wordIndex >= 0) {
-                    result.add(new Digit(i - (currentWord.length() - 1), wordIndex + 1));
+                    result.add(new Digit(i - (currentWord.length() - 1), wordIndex + 1, currentWord));
                     // We can keep only the last letter of currentWord because there is no more overlapping between all spelled digits
                     currentWord = currentWord.substring(currentWord.length() - 1);
                 } else {
                     // If not a perfect match we remove the first letter of currentWord
                     // until it's empty or there is candidates
-                    while(!currentWord.isEmpty() && findCandidates(currentWord, spelledDigits).isEmpty()) {
+                    while(!currentWord.isEmpty() && !hasCandidates(currentWord)) {
                         currentWord = currentWord.substring(1);
                     }
                 }
@@ -54,10 +54,7 @@ public class LineDecoder {
         return c >= '0' && c <= '9';
     }
 
-    private List<Digit> findCandidates(String word, List<String> allCandidates) {
-        return allCandidates.stream()
-                .filter(s -> s.startsWith(word))
-                .map(s -> new Digit(0, allCandidates.indexOf(s) + 1))
-                .toList();
+    private boolean hasCandidates(String word) {
+        return spelledDigits.stream().anyMatch(s -> s.startsWith(word));
     }
 }

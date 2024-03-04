@@ -4,11 +4,11 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class DecoderTest {
+class LineDecoderTest {
     @Test
     void decodeLine_test() {
-        String[] inputs = {"1abc2", "pqr3stu8vwx", "a1b2c3d4e5f", "treb7uchet"};
-        int[] expectedOutputs = { 12, 38, 15, 77 };
+        String[] inputs = {"1abc2", "pqr3stu8vwx", "a1b2c3d4e5f", "treb7uchet", "two1nine"};
+        int[] expectedOutputs = { 12, 38, 15, 77, 11 };
 
         LineDecoder decoder = new LineDecoder();
 
