@@ -9,8 +9,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class LineDecoderTest {
     @Test
     public void parseLine_oneSet() {
-        String line = "Game 1: 1 red, 2 green, 6 blue";
-        Game expected = new Game(1, List.of(new Game.Set(1, 2, 6)));
+        String line = "Game 1: 10 red, 25 green, 16 blue";
+        Game expected = new Game(1, List.of(new Game.Set(10, 25, 16)));
 
         Game output = new LineDecoder().parseLine(line);
 

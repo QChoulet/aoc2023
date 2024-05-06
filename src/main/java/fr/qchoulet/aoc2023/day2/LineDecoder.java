@@ -22,13 +22,13 @@ public class LineDecoder {
         int red = 0, green = 0, blue = 0;
 
         if(setString.contains("red")) {
-            red = Integer.parseInt(setString.replaceAll(".*([0-9]+) red.*","$1"));
+            red = Integer.parseInt(setString.replaceAll(".*?([0-9]+) red.*","$1"));
         }
         if(setString.contains("green")) {
-            green = Integer.parseInt(setString.replaceAll(".*([0-9]+) green.*","$1"));
+            green = Integer.parseInt(setString.replaceAll(".*?([0-9]+) green.*","$1"));
         }
         if(setString.contains("blue")) {
-            blue  = Integer.parseInt(setString.replaceAll(".*([0-9]+) blue.*","$1"));
+            blue  = Integer.parseInt(setString.replaceAll(".*?([0-9]+) blue.*","$1"));
         }
 
         return new Game.Set(red, green, blue);
