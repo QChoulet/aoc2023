@@ -18,7 +18,7 @@ public class SoverTest {
         );
         Game.Set bagContent = new Game.Set(12, 13, 14);
 
-        String expected = "8";
+        int expected = 8;
         Solver solver = new Solver();
         assertEquals(expected, solver.solve_part1(input, bagContent));
     }

@@ -1,8 +1,5 @@
 package fr.qchoulet.aoc2023.day2;
 
-import fr.qchoulet.aoc2023.day1.animated.Line;
-import fr.qchoulet.aoc2023.utils.InputLoader;
-
 import java.util.stream.Stream;
 
 public class Solver {
@@ -20,7 +17,7 @@ public class Solver {
 
         return input.map(decoder::parseLine)
                 .map(this::minPossibleCubes)
-                .map(this::setPower)
+                .map(Game.Set::power)
                 .reduce(0, Integer::sum);
     }
 
@@ -53,9 +50,5 @@ public class Solver {
         }
 
         return minSet;
-    }
-
-    private int setPower(Game.Set set) {
-        return set.red() * set.green() * set.blue();
     }
 }
