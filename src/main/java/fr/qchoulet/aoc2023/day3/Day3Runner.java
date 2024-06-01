@@ -11,5 +11,8 @@ public class Day3Runner {
         try(Stream<String> input = InputLoader.readLines("3")) {
             System.out.printf("Part 1 : %s%n", solver.solve_part1(input));
         }
+        try(Stream<String> input = InputLoader.readLines("3")) {
+            System.out.printf("Part 2 : %s%n", solver.solve_part2(input));
+        }
     }
 }
