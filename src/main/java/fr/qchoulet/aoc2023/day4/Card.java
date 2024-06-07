@@ -10,6 +10,7 @@ public class Card {
     private final int[] winningNumbers;
     private final int[] numbers;
     private final int score;
+    private final int matches;
 
     /**
      * @throws IllegalArgumentException if input does not match the pattern ^Card +([0-9]+): +((?:[0-9]+ *)+) \\| +((?:[0-9]+ *)+)$
@@ -35,16 +36,14 @@ public class Card {
         this.id = id;
         this.winningNumbers = winningNumbers;
         this.numbers = numbers;
-        this.score = computeScore();
+        this.matches = countMatches();
+        this.score = matches == 0 ? 0 : (int) Math.pow(2, matches - 1);
     }
 
-    private int computeScore() {
-        int count = (int) Arrays.stream(numbers)
+    private int countMatches() {
+        return (int) Arrays.stream(numbers)
                 .filter(i -> Arrays.stream(winningNumbers).anyMatch(w -> w == i))
                 .count();
-
-        if(count == 0) return 0;
-        return (int) Math.pow(2, count - 1);
     }
 
     public int id() {
@@ -53,6 +52,10 @@ public class Card {
 
     public int score() {
         return score;
+    }
+
+    public int matches() {
+        return matches;
     }
 
     @Override
