@@ -8,9 +8,10 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class CardTest {
     @Test
     void fromInput() {
-        String input = "Card 1:  5 512 12 | 42 56  1 75 999";
+        String input = "Card  1:  5 512 12 | 42 56  1 75 999";
 
         Card expected = new Card(
+                1,
                 new int[]{5, 512, 12},
                 new int[]{42, 56, 1, 75, 999}
         );
